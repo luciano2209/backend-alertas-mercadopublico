@@ -7,12 +7,13 @@ const LicitacionController = require('../controllers/licitacion')
 
 
 function createToken(user, SECRET_KEY, expiresIn) {
-  const { id, firstname, lastname, email } = user
+  const { id, firstname, lastname, email, rol } = user
   const payload = {
     id,
     firstname,
     lastname,
-    email
+    email,
+    rol
   }
   return  jwt.sign(payload, SECRET_KEY, { expiresIn })
 }
