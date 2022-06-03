@@ -20,6 +20,6 @@ const serverApollo = new ApolloServer({
 
 //conect to DB (Instance) 
 
-serverApollo.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+serverApollo.listen({ port: process.env.PORT || 8080 }).then(({ url }) => {
   console.log(`🚀 Server ready at - ${url}`);
 });
