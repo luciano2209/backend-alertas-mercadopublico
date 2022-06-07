@@ -92,25 +92,21 @@ async function addAlert (input) {
 }
 
 async function getLicitacionesPorAlerta (userId) {
+  console.log(userId)
  
   try {
     const userFound = await User.findOne({ _id: userId })
-                       
-
-    const licitacionesPorAlerta = userFound.alertsId.map(async (alertId) => {
-
-      const alerta = await Alerta.findOne({ _id: alertId })
-      const licitacionPorAlerta = await LicitacionController.findByAlert(alerta)
-      return {
-        alerta: alerta,
-        licitaciones: licitacionPorAlerta
-      }
-      
-    })
-
+    const licitacionesPorAlerta = await Promise.all(
+      userFound.alertsId.map(async (alertId) => {
+        const alerta = await Alerta.findOne({ _id: alertId })
+        const licitacionPorAlerta = await LicitacionController.findByAlert(alerta)
+        return {
+          alerta: alerta,
+          licitaciones: licitacionPorAlerta
+        }      
+      })
+    )
     return licitacionesPorAlerta
-
-
   } catch (error) {
     console.log(error)
   }
