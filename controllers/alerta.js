@@ -4,6 +4,7 @@ const User = require('../models/User')
 
 async function findAll() {
   return await Alerta.find({});
+  
 }
 
 
